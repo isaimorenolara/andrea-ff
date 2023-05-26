@@ -103,14 +103,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => RecipeWidget(),
             ),
             FFRoute(
-              name: 'crearReceta',
-              path: 'crearReceta',
-              builder: (context, params) => CrearRecetaWidget(),
-            ),
-            FFRoute(
               name: 'editarPerfil',
               path: 'editarPerfil',
               builder: (context, params) => EditarPerfilWidget(),
+            ),
+            FFRoute(
+              name: 'CrearReceta',
+              path: 'crearReceta',
+              builder: (context, params) => CrearRecetaWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

@@ -1,4 +1,3 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +23,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
-
-    _model.textController ??= TextEditingController();
   }
 
   @override
@@ -198,7 +195,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('crearReceta');
+                        context.pushNamed('CrearReceta');
                       },
                       child: Container(
                         width: double.infinity,
@@ -240,10 +237,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               ),
                               Align(
                                 alignment: AlignmentDirectional(0.9, 0.0),
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Color(0xFF57636C),
-                                  size: 18.0,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed('CrearReceta');
+                                  },
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Color(0xFF57636C),
+                                    size: 18.0,
+                                  ),
                                 ),
                               ),
                             ],
@@ -323,71 +329,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         appBar: AppBar(
           backgroundColor: Color(0xFFF7089F),
           automaticallyImplyLeading: true,
-          title: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 4.0),
-            child: TextFormField(
-              controller: _model.textController,
-              autofocus: true,
-              obscureText: false,
-              decoration: InputDecoration(
-                labelText: 'Search',
-                labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                      fontFamily: 'Outfit',
-                      color: FlutterFlowTheme.of(context).primaryBtnText,
-                    ),
-                hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).alternate,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).primary,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).error,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).error,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-              ),
-              style: FlutterFlowTheme.of(context).bodyMedium,
-              validator: _model.textControllerValidator.asValidator(context),
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 10.0),
-              child: FlutterFlowIconButton(
-                borderRadius: 20.0,
-                borderWidth: 1.0,
-                buttonSize: 40.0,
-                fillColor: Color(0xFFF7089F),
-                icon: Icon(
-                  Icons.search,
-                  color: FlutterFlowTheme.of(context).primaryBtnText,
-                  size: 24.0,
-                ),
-                onPressed: () {
-                  print('IconButton pressed ...');
-                },
-              ),
-            ),
-          ],
+          actions: [],
           centerTitle: true,
           elevation: 4.0,
         ),
@@ -419,7 +361,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 text: 'Categorías',
                               ),
                               Tab(
-                                text: 'Novedades',
+                                text: 'Top',
                               ),
                             ],
                           ),

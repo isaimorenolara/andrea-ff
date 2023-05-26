@@ -1,9 +1,11 @@
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:easy_debounce/easy_debounce.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'crear_receta_model.dart';
@@ -20,153 +22,123 @@ class _CrearRecetaWidgetState extends State<CrearRecetaWidget> {
   late CrearRecetaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => CrearRecetaModel());
 
-    _model.textController1 ??= TextEditingController(text: 'Escriba el título');
-    _model.textController2 ??=
-        TextEditingController(text: 'Enliste los ingredientes');
-    _model.textController3 ??=
-        TextEditingController(text: 'Detalle el procedimiento');
+    _model.textController1 ??= TextEditingController();
+    _model.textController2 ??= TextEditingController();
+    _model.textController3 ??= TextEditingController();
+    _model.textController4 ??= TextEditingController();
   }
 
   @override
   void dispose() {
     _model.dispose();
 
+    _unfocusNode.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        automaticallyImplyLeading: false,
-        title: FFButtonWidget(
-          onPressed: () async {
-            context.pop();
-          },
-          text: 'Cancel',
-          options: FFButtonOptions(
-            width: 80.0,
-            height: 40.0,
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-            iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-            color: FlutterFlowTheme.of(context).primaryBtnText,
-            textStyle: FlutterFlowTheme.of(context).labelMedium,
-            elevation: 0.0,
-            borderSide: BorderSide(
-              color: Colors.transparent,
-              width: 1.0,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: Color(0xFFF7089F),
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 30.0,
             ),
+            onPressed: () async {
+              context.safePop();
+            },
           ),
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 16.0, 8.0),
-            child: FFButtonWidget(
-              onPressed: () {
-                print('Button pressed ...');
-              },
-              text: 'Publicar',
-              options: FFButtonOptions(
-                width: 70.0,
-                height: 32.0,
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                color: Color(0xFFF7089F),
-                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: 'Outfit',
-                      color: Colors.white,
-                    ),
-                elevation: 2.0,
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 1.0,
+          title: Text(
+            'Añadir Receta',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Poppins',
+                  color: Colors.white,
+                  fontSize: 22.0,
                 ),
-              ),
-            ),
           ),
-        ],
-        centerTitle: false,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        top: true,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 24.0, 0.0),
-              child: Row(
+          actions: [],
+          centerTitle: true,
+          elevation: 2.0,
+        ),
+        body: SafeArea(
+          top: true,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Row(
                 mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Título de receta:',
-                    style: FlutterFlowTheme.of(context).titleLarge,
-                  ),
-                  Expanded(
+                  Container(
+                    width: 380.0,
+                    height: 80.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
                     child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          15.0, 15.0, 15.0, 15.0),
                       child: TextFormField(
                         controller: _model.textController1,
                         autofocus: true,
                         obscureText: false,
                         decoration: InputDecoration(
-                          hintText: '[Some hint text...]',
-                          hintStyle: FlutterFlowTheme.of(context).bodySmall,
-                          enabledBorder: UnderlineInputBorder(
+                          labelText: 'Nombre',
+                          labelStyle: FlutterFlowTheme.of(context).bodyMedium,
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Poppins',
+                                  ),
+                          enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
                             ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          focusedBorder: UnderlineInputBorder(
+                          focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
+                              color: Color(0xFFF7089F),
+                              width: 2.0,
                             ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          errorBorder: UnderlineInputBorder(
+                          errorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
                             ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          focusedErrorBorder: UnderlineInputBorder(
+                          focusedErrorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
                             ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Outfit',
-                              fontStyle: FontStyle.italic,
+                              fontFamily: 'Poppins',
                             ),
                         validator: _model.textController1Validator
                             .asValidator(context),
@@ -175,208 +147,329 @@ class _CrearRecetaWidgetState extends State<CrearRecetaWidget> {
                   ),
                 ],
               ),
-            ),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(),
-              child: Column(
+              Row(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        'Ingredientes:',
-                        textAlign: TextAlign.start,
-                        style: FlutterFlowTheme.of(context).titleSmall,
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 12.0, 0.0, 12.0),
-                        child: TextFormField(
-                          controller: _model.textController2,
-                          onChanged: (_) => EasyDebounce.debounce(
-                            '_model.textController2',
-                            Duration(milliseconds: 2000),
-                            () => setState(() {}),
-                          ),
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            hintText: 'What\'s happening?',
-                            hintStyle: FlutterFlowTheme.of(context).labelLarge,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 8.0, 16.0, 12.0),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Outfit',
-                                    fontStyle: FontStyle.italic,
+                  Container(
+                    width: 380.0,
+                    height: 80.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          15.0, 15.0, 15.0, 15.0),
+                      child: TextFormField(
+                        controller: _model.textController2,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Porciones',
+                          labelStyle: FlutterFlowTheme.of(context).bodyMedium,
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Poppins',
                                   ),
-                          textAlign: TextAlign.start,
-                          maxLines: 7,
-                          validator: _model.textController2Validator
-                              .asValidator(context),
-                        ),
-                      ),
-                      Text(
-                        'Procedimiento:',
-                        textAlign: TextAlign.start,
-                        style: FlutterFlowTheme.of(context).titleSmall,
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 12.0, 0.0, 12.0),
-                        child: TextFormField(
-                          controller: _model.textController3,
-                          onChanged: (_) => EasyDebounce.debounce(
-                            '_model.textController3',
-                            Duration(milliseconds: 2000),
-                            () => setState(() {}),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            hintText: 'What\'s happening?',
-                            hintStyle: FlutterFlowTheme.of(context).labelLarge,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xFFF7089F),
+                              width: 2.0,
                             ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4.0),
-                                topRight: Radius.circular(4.0),
-                              ),
-                            ),
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 8.0, 16.0, 12.0),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Outfit',
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                          textAlign: TextAlign.start,
-                          maxLines: 7,
-                          validator: _model.textController3Validator
-                              .asValidator(context),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
                         ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Poppins',
+                            ),
+                        validator: _model.textController2Validator
+                            .asValidator(context),
                       ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  'https://picsum.photos/seed/277/600',
-                  width: double.infinity,
-                  height: 170.0,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                    child: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30.0,
-                      borderWidth: 1.0,
-                      buttonSize: 60.0,
-                      icon: Icon(
-                        Icons.add_photo_alternate_outlined,
-                        color: FlutterFlowTheme.of(context).primary,
-                        size: 32.0,
-                      ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
-                      },
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 380.0,
+                    height: 150.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 15.0),
+                      child: TextFormField(
+                        controller: _model.textController3,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Ingredientes',
+                          labelStyle: FlutterFlowTheme.of(context).bodyMedium,
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Poppins',
+                                  ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xFFF7089F),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Poppins',
+                            ),
+                        maxLines: 6,
+                        validator: _model.textController3Validator
+                            .asValidator(context),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 380.0,
+                    height: 150.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 15.0),
+                      child: TextFormField(
+                        controller: _model.textController4,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'instrucciones de preparación',
+                          labelStyle: FlutterFlowTheme.of(context).bodyMedium,
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Poppins',
+                                  ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xFFF7089F),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Poppins',
+                            ),
+                        maxLines: 6,
+                        validator: _model.textController4Validator
+                            .asValidator(context),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 350.0,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                    child: FlutterFlowDropDown<String>(
+                      controller: _model.dropDownValueController ??=
+                          FormFieldController<String>(null),
+                      options: [
+                        'Entrada',
+                        'Plato fuerte',
+                        'Postre',
+                        'Snack',
+                        'Bebida'
+                      ],
+                      onChanged: (val) =>
+                          setState(() => _model.dropDownValue = val),
+                      width: 300.0,
+                      height: 50.0,
+                      searchHintTextStyle:
+                          FlutterFlowTheme.of(context).labelMedium,
+                      textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                      hintText: 'Categoría',
+                      searchHintText: 'Search for an item...',
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        size: 24.0,
+                      ),
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                      elevation: 2.0,
+                      borderColor: FlutterFlowTheme.of(context).alternate,
+                      borderWidth: 2.0,
+                      borderRadius: 8.0,
+                      margin:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+                      hidesUnderline: true,
+                      isSearchable: false,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 350.0,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Valoración',
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RatingBar.builder(
+                              onRatingUpdate: (newValue) => setState(
+                                  () => _model.ratingBarValue = newValue),
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star_rounded,
+                                color: FlutterFlowTheme.of(context).warning,
+                              ),
+                              direction: Axis.horizontal,
+                              initialRating: _model.ratingBarValue ??= 0.0,
+                              unratedColor:
+                                  FlutterFlowTheme.of(context).accent3,
+                              itemCount: 5,
+                              itemSize: 40.0,
+                              glowColor: FlutterFlowTheme.of(context).warning,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 1.0, 15.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FFButtonWidget(
+                      onPressed: () {
+                        print('Button pressed ...');
+                      },
+                      text: 'Añadir',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: Color(0xFFF7089F),
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
